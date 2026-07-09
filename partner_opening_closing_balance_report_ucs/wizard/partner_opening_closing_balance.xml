@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_partner_opening_closing_balance_form" model="ir.ui.view">
+        <field name="name">partner.opening.closing.balance.form</field>
+        <field name="model">partner.opening.closing.balance</field>
+        <field name="arch" type="xml">
+            <form string="Partner Trial Balance">
+                <sheet>
+                    <group>
+                        <group>
+                                <label for="date_from" string="Date"/>
+                                <div class="o_row">
+                                    <field name="date_from" class="oe_inline" />
+                                    <field name="date_to" />
+                                </div>
+                                <field name="result_selection"/>
+                                <field name="is_zero_account" />
+                        </group>
+                        <group>
+                            <field name="partner_domain" invisible="1" />
+                            <field name="partner_ids" widget="many2many_tags" domain="partner_domain"/>
+                            <field name="company_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Print" type="object" name="action_print_report" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_partner_opening_closing_balance" model="ir.actions.act_window">
+        <field name="name">Trial Balance Report</field>
+        <field name="res_model">partner.opening.closing.balance</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_partner_opening_closing_balance" name="Trial Balance Report" parent="account.menu_finance_reports" action="action_partner_opening_closing_balance"/>
+</odoo>
